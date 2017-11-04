@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<script>
+  function myFunction() {
+    alert("Click button.")
+    window.location = "https://www.w3schools.com/";
+    var x = document.getElementById("demo");
+    x.style.fontSize = "25px";
+    x.style.color = "red";
+  }
+</script>
+
+<body>
+  <!-- ##### HTML測試 ##### -->
+  <div>
+    <h1>
+      <%= title %>
+    </h1>
+  </div>
+  <div>
+    <p>Welcome to
+      <%= title %>
+    </p>
+  </div>
+  <div>
+    <p>./routes/idnex.ejs say: oooooooooooo</p>
+    <form method="post" action="/login">
+      <p>User ID:
+        <input id="userid" name="userid" type="text">
+      </p>
+      <p>Password:
+        <input id="pwd" name="pwd" type="password">
+      </p>
+      <input type="submit" id="submit" name="submit" value="提交">
+    </form>
+  </div>
+  <div>
+    <a href="https://www.google.com.tw/">Google</a>
+    <!-- width="n" height="n" 依照原始大小 -->
+    <!-- width="500" height="n" 依照 width-500 放大/縮小 -->
+    <img src="./images/WebTech.png" alt="no img" title="is Web Tech." width="500" height="n">
+    <button onclick="myFunction()">Click to show alert.</button>
+  </div>
+  <!-- ##### 表格 ##### -->
+  <div>
+    <form action="#" method="post">
+      <!-- 個人資料 - part I (必填) -->
+      <fieldset>
+        <legend>個人資料 - part I
+          <em>必填</em>
+        </legend>
+        <div class="st1">
+          <label class="title">姓名：</label>
+          <input type="text" name="account" value="guest" size="10">
+        </div>
+        <div class="st1">
+          <label class="title">密碼：</label>
+          <input type="password" name="pwd" size="16">
+        </div>
+        <div class="st1">
+          <label class="title">性別：</label>
+          <input type="radio" name="gender" value="male">男
+          <input type="radio" name="gender" value="female">女
+        </div>
+      </fieldset>
+      <!-- 個人資料 - part II (必填) -->
+      <fieldset>
+        <legend>個人資料 - part II
+          <em>必填</em>
+        </legend>
+        <div class="st1">
+          <label class="title">郵遞區號：</label>
+          <input type="text" name="postcode" size="5" maxlength="5">
+        </div>
+        <div class="st1">
+          <label class="st1">
+            <label class="title">區域：</label>
+            <select name="add1">
+              <option value="1">北部</option>
+              <option value="2">中部</option>
+              <option value="3">南部</option>
+              <option value="4">東部</option>
+              <option value="5">外島</option>
+            </select>
+          </label>
+        </div>
+        <div class="st1">
+          <label class="title">地址：</label>
+          <input type="text" name="add2" size="40">
+        </div>
+      </fieldset>
+      <fieldset>
+        <!-- 個人資料 - part III (選填) -->
+        <legend>個人資料 - part III</legend>
+        <div class="st1">
+          <label class="title">興趣：</label>
+          <input type="checkbox" name="hobby" value="music">音樂
+          <input type="checkbox" name="hobby" value="sport">運動
+          <input type="checkbox" name="hobby" value="reading">閱讀
+          <input type="checkbox" name="hobby" value="movie">電影
+        </div>
+        <div class="st1">
+          <label class="title">照片：</label>
+          <input type="file" name="file1">
+        </div>
+        <div class="st1">
+          <label class="title">意見：</label>
+          <textarea cols="50" rows="5"></textarea>
+        </div>
+      </fieldset>
+      <div class="submit">
+        <input type="submit" value="送出">
+        <input type="reset" value="清除">
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
