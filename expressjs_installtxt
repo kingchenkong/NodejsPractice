@@ -52,7 +52,7 @@ $ DEBUG=myapp:* npm start
 // — 執行後，欲離開 按按鍵 control + c (不是command鍵)
 
 
-$ DEBUG=express-login:* npm start
+$ DEBUG=express-mysqltest:* npm start
 
 在 Windows 中，使用下列指令：
 > set DEBUG=myapp:* & npm start
@@ -79,5 +79,26 @@ $ DEBUG=express-login:* npm start
 
 7 directories, 9 files
 ------------------------------------------------------------
+DEMO package.json
 
+{
+  "name": "express-mysqltest",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.15.5",
+    "morgan": "~1.9.0",
+    "serve-favicon": "~2.4.5",
+    "jade”:”~1.11.0",
+    "mongodb”:”~2.2.33",
+    "mongoose”:”~4.13.0"
+  }
+}
 
