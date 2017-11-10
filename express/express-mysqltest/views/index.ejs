@@ -2,78 +2,82 @@
 <html>
 
 <head>
-  <title>
-    <%= title %>
-  </title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <script>
-    function Edit(id) {
-        window.location.href = "/userEdit?id=" + id;
-    }
-
-    function Delete(id) {
-        var rs = confirm('Confirm to delete?');
-        if (rs) {
-            window.location.href = "/userDelete?id=" + id;
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script>
+        function Edit(id) {
+            window.location.href = "/userEdit?id=" + id;
         }
-    }
 
-    function Search() {
+        function Delete(id) {
+            var rs = confirm('Confirm to delete?');
+            if (rs) {
+                window.location.href = "/userDelete?id=" + id;
+            }
+        }
 
-        var userid = document.getElementsByName('suserid')[0].value;
-        window.location.href = "/?user=" + userid;;
-    }
+        function Search() {
+            var userid = document.getElementsByName('suserid')[0].value;
+            window.location.href = "/?user=" + userid;;
+        }
     </script>
 </head>
 
 <body>
-  <!-- Original
+    <!-- Original
       <h1><%= title %></h1>
     <p>Welcome to <%= title %></p> 
   -->
-  <!-- New -->
-  <h1>Account - List</h1>
-  <div class="search">
-      <label>UserId：</label>
-      <input type="text" name="suserid" value="<%=user  %>" placeholder="input the userid">
-      <input type="button" name="sSearch" value="Search" class="btn" onclick="Search();">
-  </div>
-  <div class="control">
-      <input class="btn" type='submit' value='Add' onclick="javascript: location.href='add'">
-  </div>
-  <table class="table">
-      <tr>
-          <th>id</th>
-          <th>userid</th>
-          <th>password</th>
-          <th>email</th>
-          <th></th>
-      </tr>
-      <% for ( var i = 0 ; i < data.length ; i++){ %>
-          <tr>
-              <td>
-                  <%= data[i].id  %>
-              </td>
-              <td>
-                  <%= data[i].userid  %>
-              </td>
-              <td>
-                  <%= data[i].password  %>
-              </td>
-              <td>
-                  <%= data[i].email  %>
-              </td>
-              <td>
-                  <input type="button" name="edit" value="Edit" class="btn" onclick="Edit('<%= data[i].id  %>');" />
-                  <input type="button" name="delete" value="Delete" class="btn" onclick="Delete('<%= data[i].id  %>');" />
-              </td>
-          </tr>
-          <% } %>
-  </table>
-  <!-- SELECT -->
-  <!-- ADD -->
-  <!-- Edit-->
-  
+    <!-- New -->
+    <h1>Account - List</h1>
+    <div class="search">
+        <label>UserId：</label>
+        <input type="text" name="suserid" value="<%=user  %>" placeholder="input the userid">
+        <input type="button" name="sSearch" value="Search" class="btn" onclick="Search();">
+    </div>
+    <div class="control">
+        <input class="btn" type='submit' value='Add' onclick="javascript: location.href='add'">
+    </div>
+    <table class="table">
+        <tr>
+            <th>id</th>
+            <th>userid</th>
+            <th>password</th>
+            <th>email</th>
+            <th></th>
+        </tr>
+        <!-- 
+            在 ejs 樣板設計中，利用 <% %> 可執行 javascript 語法，我們以此方式，將 資料集 印出。
+            利用 data.length ，可取得資料筆數 
+            data[i].id：引數 i 為 DataTable 中的列索引，id 為資料表欄位名稱   
+        -->
+        <% for ( var i = 0 ; i < data.length ; i++){ %>
+            <tr>
+                <td>
+                    <%= data[i].id  %>
+                </td>
+                <td>
+                    <%= data[i].userid  %>
+                </td>
+                <td>
+                    <%= data[i].password  %>
+                </td>
+                <td>
+                    <%= data[i].email  %>
+                </td>
+                <td>
+                    <input type="button" name="edit" value="Edit" class="btn" onclick="Edit('<%= data[i].id  %>');" />
+                    <input type="button" name="delete" value="Delete" class="btn" onclick="Delete('<%= data[i].id  %>');" />
+                </td>
+            </tr>
+            <% } %>
+    </table>
+    <!-- SELECT -->
+    <!-- ADD -->
+    <!-- Edit-->
+
 </body>
 
 </html>

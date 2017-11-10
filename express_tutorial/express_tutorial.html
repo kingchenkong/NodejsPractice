@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title> Express js Tutorial</title>
+    <style>
+        .code_green {
+            color: green;
+            font-weight: bold;
+            background-color: black;
+            font-size: 12pt;
+        }
+
+        div.codeblock {
+            background-color: black;
+            width: 1200px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Express js - Install</h2>
+    <hr>
+    <div>
+        <!-- 第一次安裝 -->
+        <table border="3">
+            <tr>
+                <td>第一次安裝</td>
+            </tr>
+        </table>
+        <p>建立一個名為 myapp 的目錄， </p>
+        <div class="codeblock">
+            <p class="code_green"> $ mkdir myapp </p>
+        </div>
+        <p> 切換至該目錄，</p>
+        <div class="codeblock">
+            <p class="code_green"> $ cd myapp </p>
+        </div>
+        <p>並執行 npm init。 </p>
+        <div class="codeblock">
+            <p class="code_green"> $ npm init </p>
+        </div>
+
+        <div class="codeblock">
+            <p class="code_green"> - entry point: (index.js)</p>
+        </div>
+        <p>將 express 安裝成一個相依關係。 </p>
+        <div class="codeblock">
+            <p class="code_green"> $ npm install express --save</p>
+        </div>
+
+        <p>在 myapp 目錄中，建立名為 index.js 的檔案，並新增下列程式碼：</p>
+        <div class="codeblock">
+            <pre>
+                <code class="code_green" translate="no">
+var express = require('express');
+var app = express();
+app.get('/', function (req, res) {
+res.send('Hello World!');
+});
+app.listen(3000, function () {
+console.log('Example app listening on port 3000!');
+});
+                </code>
+            </pre>
+        </div>
+    </div>
+    <p>啟動 app.js</p>
+    <div class="codeblock">
+        <p class="code_green">$ node app.js</p>
+    </div>
+    <p>然後在瀏覽器中載入
+        <em style="color:blue">http://localhost:3000/</em>，以查看輸出。</p>
+    <!-- 直接產生 Express project -->
+    <div>
+        <table border="3">
+            <tr>
+                <td>直接產生 Express project</td>
+            </tr>
+        </table>
+        在全域安裝(任何路徑下) express, 使用
+        <em style="color:navy">最高權限使用者</em> 安裝 express-generator
+        <br> 使用下列指令來安裝 express：
+        <div class="codeblock">
+            <p class="code_green">
+                $ sudo npm install express-generator -g
+            </p>
+        </div>
+        使用 -h 選項來 確認 Express 已安裝， 同時顯示指令選項：
+        <div class="codeblock">
+            <p class="code_green">
+                $ express -h
+            </p>
+        </div>
+        舉例來說，以下是在現行工作目錄中建立一個名為 myapp 的 Express 應用程式：
+        <div class="codeblock">
+            <p class="code_green">
+                $ express --view=pug myapp
+                <br>
+            </p>
+            --view=pug 可以改為 --view=ejs，產生的./views資料夾底下會是js語言
+        </div>
+        然後安裝相依項目：
+        <div class="codeblock">
+            <p class="code_green">
+                $ cd myapp
+                <br> $ npm install
+            </p>
+        </div>
+        在 MacOS 或 Linux 中，使用下列指令來執行應用程式：
+        <div class="codeblock">
+            <p class="code_green">
+                $ DEBUG=myapp:* npm start
+            </p>
+        </div>
+        在 Windows 中，使用下列指令：
+        <div class="codeblock">
+            <p class="code_green">
+                > set DEBUG=myapp:* & npm start
+            </p>
+        </div>
+        - 也可以直接輸入 npm start
+        <br> — 執行後，欲離開 按按鍵 control + c (不是command鍵)
+        <p>然後在瀏覽器中載入
+            <em style="color:blue">http://localhost:3000/</em>，以查看輸出。
+        </p>
+    </div>
+    <div>
+        產生的應用程式具有如下的目錄結構：
+        <div class="codeblock">
+            <pre>
+                <code class="code_green" translate="no">
+    .
+    ├── app.js
+    ├── bin
+    │   └── www
+    ├── package.json
+    ├── public
+    │   ├── images
+    │   ├── javascripts
+    │   └── stylesheets
+    │       └── style.css
+    ├── routes
+    │   ├── index.js
+    │   └── users.js
+    └── views
+        ├── error.pug
+        ├── index.pug
+        └── layout.pug
+                </code>
+            </pre>
+        </div>
+    </div>
+    <!-- DEMO package.json -->
+    <div>
+        <table border="3">
+            <tr>
+                <td> DEMO package.json </td>
+            </tr>
+        </table>
+        <div class="codeblock">
+            <pre>
+                    <code class="code_green" translate="no">
+    {
+        "name": "express-mysqltest",
+        "version": "0.0.0",
+        "private": true,
+        "scripts": {
+        "start": "node ./bin/www"
+        },
+        "dependencies": {
+        "body-parser": "~1.18.2",
+        "cookie-parser": "~1.4.3",
+        "debug": "~2.6.9",
+        "ejs": "~2.5.7",
+        "express": "~4.15.5",
+        "morgan": "~1.9.0",
+        "serve-favicon": "~2.4.5",
+        "jade”:”~1.11.0",
+        "mongodb”:”~2.2.33",
+        "mongoose”:”~4.13.0"
+        }
+    }
+                </code>
+            </pre>
+        </div>
+    </div>
+</body>
+</html>

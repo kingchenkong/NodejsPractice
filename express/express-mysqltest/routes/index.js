@@ -10,25 +10,39 @@ var router = express.Router();
 // ----- home page
 router.get('/', function (req, res, next) {
 
-  var db = req.con;
+  var db = req.db_con; // 建立 var db 賦予 req.db_con 連線物件資訊
   var data = "";
-
   var user = "";
   var user = req.query.user;
+  // console.log('req.query.user => ' + req.query.user);
+  // console.log('req.query => ' + req.query);
 
   var filter = "";
   if (user) {
     filter = 'WHERE userid = ?';
+    // table: account, column: userid, = ? is Method:GET parameter => req.query.user
+    // ex: filter = 'WHERE password = ?';
+    // will got password = req.query.user
   }
 
+  // var test = "admin";
+
   db.query('SELECT * FROM account ' + filter, user, function (err, rows) {
+    // - db.query( ) 為進行資料庫存取，返回結果為 err、rows
+    // - 回傳資料 rows 以陣列格式儲存
     if (err) {
       console.log(err);
     }
     var data = rows;
 
+    // console.log('filter = ' + filter);
+    // console.log('user = ' + user);
+    // console.log(JSON.stringify(rows));
+
     // use index.ejs
     res.render('index', { title: 'Account Information', data: data, user: user });
+    // - 在 render 部分，我們將 rows 指定到 data 變數
+    // - data: data，此為給予名稱 data，其內容為 data，將於 ejs 樣板部分使用
   });
 
 });
@@ -43,7 +57,7 @@ router.get('/add', function (req, res, next) {
 // add post
 router.post('/userAdd', function (req, res, next) {
 
-  var db = req.con;
+  var db = req.db_con;
 
   // check userid exist
   var userid = req.body.userid;
@@ -86,7 +100,7 @@ router.get('/userEdit', function (req, res, next) {
   var id = req.query.id;
   //console.log(id);
 
-  var db = req.con;
+  var db = req.db_con;
   var data = "";
 
   db.query('SELECT * FROM account WHERE id = ?', id, function (err, rows) {
@@ -103,7 +117,7 @@ router.get('/userEdit', function (req, res, next) {
 
 router.post('/userEdit', function (req, res, next) {
 
-  var db = req.con;
+  var db = req.db_con;
 
   var id = req.body.id;
 
@@ -129,7 +143,7 @@ router.get('/userDelete', function (req, res, next) {
 
   var id = req.query.id;
 
-  var db = req.con;
+  var db = req.db_con;
 
   var qur = db.query('DELETE FROM account WHERE id = ?', id, function (err, rows) {
     if (err) {

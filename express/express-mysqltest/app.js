@@ -5,13 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+var index = require('./routes/index'); //call './routes/index' module => index.js
+var users = require('./routes/users'); //call './routes/users' module => users.js
 
 //----------------- DataBase -----------------
 var mysql = require("mysql");
 
-var con = mysql.createConnection({
+var db_con = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "root",
@@ -19,7 +19,7 @@ var con = mysql.createConnection({
   port: 3307
 });
 
-con.connect(function (err) {
+db_con.connect(function (err) {
   if (err) {
     console.log('connecting error');
     return;
@@ -45,11 +45,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 //----------------- DataBase -----------------
 // db state
 app.use(function (req, res, next) {
-  req.con = con;
+  req.db_con = db_con;
   next();
 });
 //----------------- -----------------
 
+// app.METHOD(PATH, HANDLER)
 app.use('/', index);
 app.use('/users', users);
 
