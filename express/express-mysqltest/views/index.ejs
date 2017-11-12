@@ -69,14 +69,19 @@
                 </td>
                 <td>
                     <input type="button" name="edit" value="Edit" class="btn" onclick="Edit('<%= data[i].id  %>');" />
+                    <!-- 
+                        Edit('<%= data[i].id  %>'); 
+                        button-Edit onclick: do function Edit(id)
+                    -->
                     <input type="button" name="delete" value="Delete" class="btn" onclick="Delete('<%= data[i].id  %>');" />
+                    <!-- 
+                        Delete('<%= data[i].id  %>'); 
+                        button-Delete onclick: function Delete(id)
+                    -->
                 </td>
             </tr>
             <% } %>
     </table>
-    <!-- SELECT -->
-    <!-- ADD -->
-    <!-- Edit-->
 
 </body>
 

@@ -47,31 +47,32 @@ router.get('/', function (req, res, next) {
 
 });
 
-// add page
+// add page .GET
 router.get('/add', function (req, res, next) {
 
   // use userAdd.ejs
   res.render('userAdd', { title: 'Add User', msg: '' });
 });
 
-// add post
+// add page .POST
 router.post('/userAdd', function (req, res, next) {
 
   var db = req.db_con;
-
   // check userid exist
   var userid = req.body.userid;
+  // 先查詢是否重複
   var qur = db.query('SELECT userid FROM account WHERE userid = ?', userid, function (err, rows) {
     if (err) {
       console.log(err);
     }
 
     var count = rows.length;
+    // rows.length > 0 => 表示有查詢到相符合的資料
     if (count > 0) {
 
-      var msg = 'Userid already exists.';
-      res.render('userAdd', { title: 'Add User', msg: msg });
-
+      var msg_userexist = 'Userid already exists.';
+      res.render('userAdd', { title: 'Add User', msg: msg_userexist });
+      // use userAdd.ejs
     } else {
 
       var sql = {
@@ -85,8 +86,10 @@ router.post('/userAdd', function (req, res, next) {
         if (err) {
           console.log(err);
         }
+        // -- ?
         res.setHeader('Content-Type', 'application/json');
         res.redirect('/');
+          // - 重新導向 to '/' : home page
       });
     }
   });
@@ -94,33 +97,33 @@ router.post('/userAdd', function (req, res, next) {
 
 });
 
-// edit page
+// edit page .GET
 router.get('/userEdit', function (req, res, next) {
-
+  
   var id = req.query.id;
-  //console.log(id);
-
+  // get 'id' from index.ejs_btn-edit
+  // console.log(id);
   var db = req.db_con;
   var data = "";
 
+  // SELECT by 'id'
   db.query('SELECT * FROM account WHERE id = ?', id, function (err, rows) {
     if (err) {
       console.log(err);
     }
 
+    // give data to /userEdit
     var data = rows;
     res.render('userEdit', { title: 'Edit Account', data: data });
   });
 
 });
 
-
+//edit page .POST
 router.post('/userEdit', function (req, res, next) {
 
   var db = req.db_con;
-
   var id = req.body.id;
-
   var sql = {
     userid: req.body.userid,
     password: req.body.password,
@@ -134,17 +137,16 @@ router.post('/userEdit', function (req, res, next) {
 
     res.setHeader('Content-Type', 'application/json');
     res.redirect('/');
+    // - 重新導向 to '/' : home page
   });
 
 });
 
-
+// delete page
 router.get('/userDelete', function (req, res, next) {
 
   var id = req.query.id;
-
   var db = req.db_con;
-
   var qur = db.query('DELETE FROM account WHERE id = ?', id, function (err, rows) {
     if (err) {
       console.log(err);
