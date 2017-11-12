@@ -7,20 +7,23 @@
     </title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script>
+        
+        //btn-edit onclick:
         function Edit(id) {
             window.location.href = "/userEdit?id=" + id;
         }
 
+        // btn-delete onclick:
         function Delete(id) {
             var rs = confirm('Confirm to delete?');
             if (rs) {
                 window.location.href = "/userDelete?id=" + id;
             }
         }
-
+        // btn-search- onclick:
         function Search() {
             var userid = document.getElementsByName('suserid')[0].value;
-            window.location.href = "/?user=" + userid;;
+            window.location.href = "/?user=" + userid;
         }
     </script>
 </head>
@@ -35,10 +38,19 @@
     <div class="search">
         <label>UserId：</label>
         <input type="text" name="suserid" value="<%=user  %>" placeholder="input the userid">
+        <!--
+            value => routes .Get req.query.user
+        -->
         <input type="button" name="sSearch" value="Search" class="btn" onclick="Search();">
+        <!--
+            send: "/?user=" + userid;
+        -->
     </div>
     <div class="control">
         <input class="btn" type='submit' value='Add' onclick="javascript: location.href='add'">
+        <!--
+            btn-add onclick: to /add
+        -->
     </div>
     <table class="table">
         <tr>
@@ -72,15 +84,25 @@
                     <!-- 
                         Edit('<%= data[i].id  %>'); 
                         button-Edit onclick: do function Edit(id)
+                        {
+                            window.location.href = "/userEdit?id=" + id;
+                        }
+                        
                     -->
                     <input type="button" name="delete" value="Delete" class="btn" onclick="Delete('<%= data[i].id  %>');" />
                     <!-- 
                         Delete('<%= data[i].id  %>'); 
                         button-Delete onclick: function Delete(id)
+                        {
+                            windows.location.href = "/userDelete?id=" + id;
+                        }
                     -->
                 </td>
             </tr>
             <% } %>
+            <!--
+                for loop end here.
+            -->
     </table>
 
 </body>

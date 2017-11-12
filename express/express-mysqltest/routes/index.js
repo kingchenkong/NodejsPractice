@@ -7,7 +7,7 @@ var router = express.Router();
 //   res.render('index', { title: 'Express' });
 // });
 
-// ----- home page
+// ----- home page (search page )
 router.get('/', function (req, res, next) {
 
   var db = req.db_con; // 建立 var db 賦予 req.db_con 連線物件資訊
