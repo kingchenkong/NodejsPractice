@@ -27,7 +27,6 @@ db_con.connect(function (err) {
   console.log('connecting success');
 });
 //----------------- -----------------
-
 var app = express();
 
 // view engine setup

@@ -1,0 +1,59 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title></title>
+    <script type="text/javascript">
+    </script>
+</head>
+
+<body>
+    <table class="table">
+        <tr>
+            <th>id</th>
+            <th>userid</th>
+            <th>password</th>
+            <th>email</th>
+            <th></th>
+        </tr>
+        <% for ( var i = 0 ; i < data.length ; i++){ %>
+            <tr>
+                <td>
+                    <%= data[i].Emp_Account  %>
+                </td>
+                <td>
+                    <%= data[i].Password  %>
+                </td>
+                <td>
+                    <%= data[i].Act_Permission  %>
+                </td>
+                <td>
+                    <%= data[i].Emp_Name  %>
+                </td>
+                <td>
+                    <%= data[i].Act_Setting  %>
+                </td>
+                <td>
+                    <%= data[i].Act_AnotherData  %>
+                </td>
+                <td>
+                    <%= data[i].Company  %>
+                </td>
+                <td>
+                    <%= data[i].Department  %>
+                </td>
+
+                <td>
+                    <input type="button" name="edit" value="Edit" class="btn" onclick="Edit('<%= data[i].id  %>');" />
+
+                    <input type="button" name="delete" value="Delete" class="btn" onclick="Delete('<%= data[i].id  %>');" />
+
+                </td>
+            </tr>
+            <% } %>
+    </table>
+</body>
+
+</html>

@@ -39,8 +39,8 @@ router.get('/', function (req, res, next) {
     // console.log('user = ' + user);
     // console.log(JSON.stringify(rows));
 
-    // use index.ejs
     res.render('index', { title: 'Account Information', data: data, user: user });
+    // to index.ejs
     // - 在 render 部分，我們將 rows 指定到 data 變數
     // - data: data，此為給予名稱 data，其內容為 data，將於 ejs 樣板部分使用
   });
@@ -155,4 +155,5 @@ router.get('/userDelete', function (req, res, next) {
   });
 });
 
+//----- Module export -----
 module.exports = router;

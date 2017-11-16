@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <title>Express - Ajax</title>
+    <script type="text/javascript">
+        function get_jsonp() {
+             $.getJSON("http://localhost:3000/jsonp?callback=?",
+            function(data) {
+                $('#input-jsonp').val('JSONP info : ' + data.status);
+            }); 
+        }
+        function get_json() {
+            $.getJSON("json", function(data){
+                $('#input-json').val('JSON info : ' + data.status);
+            });
+        }
+        </script>
+</head>
+
+<body>
+    <p>Express - Ajax</p>
+    <p>
+        <a href="javascript:get_jsonp();">點擊使用 - jsonp</a>
+    </p>
+    <br/>
+    <input id="input-jsonp" type="text" size="48" />
+    <br/>
+    </p>
+    <p>
+        <a href="javascript:get_json();">點擊使用 - json</a>
+    </p>
+    <br/>
+    <input id="input-json" type="text" size="48" />
+    <br/>
+    </p>
+
+
+</body>
+
+</html>

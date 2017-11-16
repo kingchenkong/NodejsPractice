@@ -1,0 +1,92 @@
+<!--
+  <!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+  </body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+  <meta charset="utf-8">
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="./stylesheets/scss/login.min.css">
+  <!--
+  <script>
+  var wid_win = window.innerWidth;
+  var hei_win = window.innerHeight;
+  alert(wid_win);
+  alert(hei_win);
+  </script>
+-->
+  <!--
+  <style>
+    body {
+      background-image: url("https://i.imgur.com/7YzybCa.jpg");
+      background-size: 1280px auto;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  </style>
+-->
+  <script>
+    
+    // btn-search- onclick:
+    function Search() {
+      var account = document.getElementsByName('account')[0].value;
+      var password = document.getElementsByName('pqssword')[0].value;
+
+      // Foolproof
+      if (account == "") {
+        alert('Account is empty.');
+        return;
+      }
+      if (password == "") {
+        alert('Password is empty.');
+        return;
+      }
+       
+      // window.location.href = "/profile02/post"
+      window.location.href = "/profile/?account=" + account + "&password=" + password;
+    }
+  </script>
+</head>
+
+<body id="BG">
+  <section id="login-part">
+    <div class="logo">
+      <span class="workdone">workdone</span>
+      <span class="rectangle-9"></span>
+    </div>
+
+    <div class="id-column">
+      <!--<span class="id">信箱</span>-->
+      <input type="id-input" name="account" placeholder="Account">
+    </div>
+
+    <div class="pwd-column">
+      <!--<span class="pwd">密碼</span>-->
+      <input type="pwd-input" name="pqssword" placeholder="Password">
+    </div>
+
+    <div class="login-button">
+      <span class="login" onclick="Search();">登入</span>
+    </div>
+
+    <div class="forgot-pwd-link">
+      <a href="#" style="color: black" span class="forgot-pwd">忘記密碼？</span>
+    </div>
+  </section>
+
+</body>
+
+</html>
