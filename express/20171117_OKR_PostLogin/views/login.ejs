@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/scss/login.min.css">
+    <!-- weichu's css -->
+    <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+    <!-- jQuery lib -->
+    <script src="/javascripts/ajax.js"></script>
+    <!-- ajax.js -->
+    <script>
+        // btn-search- onclick:
+        // var account = document.getElementsByName('account')[0].value;
+        // var password = document.getElementsByName('password')[0].value;
+
+        function Search() {
+            // Foolproof
+            var account = document.getElementsByName('account')[0].value;
+            var password = document.getElementsByName('password')[0].value;
+            console.log(account);
+            if (account == '') {
+                alert('Account is empty.');
+                return;
+            }
+            if (password == '') {
+                alert('Password is empty.');
+                return;
+            }
+            window.location.href = '/profile/?account=' + account + '&password=' + password;
+        }
+        function Send_acc_pwd() {
+            // Foolproof
+            var account = document.getElementsByName('account')[0].value;
+            var password = document.getElementsByName('password')[0].value;
+            console.log(account);
+            if (account == '') {
+                alert('Account is empty.');
+                return;
+            }
+            if (password == '') {
+                alert('Password is empty.');
+                return;
+            }
+            Check_acc_pwd('post', account, password);
+        }
+        function formSubmit() {
+            // Foolproof
+            var account = document.getElementsByName('account')[0].value;
+            var password = document.getElementsByName('password')[0].value;
+            console.log(account);
+            if (account == '') {
+                alert('Account is empty.');
+                return;
+            }
+            if (password == '') {
+                alert('Password is empty.');
+                return;
+            }
+            document.getElementById("UserInfoForm").submit()
+        }
+        function DataDismatch(){
+            var url = 'http://localhost:3000';
+            var statusCode = <%- JSON.stringify(statusCode) %>;
+            console.log(statusCode);
+            
+            if(statusCode != 'init'){
+                alert('Data Dismatch');
+            }
+        }
+    </script>
+</head>
+
+<body id="BG" onload="DataDismatch();">
+    <section id="login-part">
+        <div class="logo">
+            <span class="workdone">workdone</span>
+            <span class="rectangle-9"></span>
+        </div>
+        <form id="UserInfoForm" action="/login" method='post'>
+            <div class="id-column">
+                <!-- Account = 信箱 -->
+                <input id="acc-input" type="id-input" name="account" placeholder="Account">
+            </div>
+            <div class="pwd-column">
+                <!-- Password -->
+                <input id="pwd-input" type="pwd-input" name="password" placeholder="Password">
+            </div>
+            <!-- <input type="submit" value='Submit'> -->
+        </form>
+        <div class="login-button">
+            <span class="login" onclick="formSubmit();">登入</span>
+        </div>
+        <div class="forgot-pwd-link">
+            <a href="#" style="color: black" span class="forgot-pwd">忘記密碼？</span>
+        </div>
+    </section>
+
+</body>
+
+</html>

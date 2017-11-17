@@ -30,7 +30,7 @@ app.get('/jsonp', function (req, res, next) {
   });
 });
 app.get('/json', function (req, res, next) {
-  res.jsonp({
+  res.send({
     status: 'status : json'
   });
 });

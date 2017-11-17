@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+    <script src="/javascripts/ajax.js"></script>
+    <script>
+        function SendAjaxRequest() {
+            Req_ajax("client post", "post");
+            Req_ajax("client get", "get");
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Express - Ajax test</h1>
+    <p id="status"></p>
+    <input type="button" value="Send Ajax Request" onclick="SendAjaxRequest();" />
+</body>
+
+</html>
