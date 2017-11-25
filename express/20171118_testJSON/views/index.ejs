@@ -1,11 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/stylesheets/scss/login.min.css">
+  <!-- weichu's css -->
+  <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+  <!-- jQuery lib -->
+  <script src="/javascripts/ajax.js"></script>
+  <!-- ajax.js -->
+  <script>
+    function toJSONExchange() {
+      window.location.href = '/jsonEx';
+    }
+  </script>
+</head>
+
+<body>
+  <p style="font-size: 30px;">Welcome to
+    <%= title %>
+  </p>
+  <section id="login-part">
+    <div class="login-button">
+      <span class="login" onclick="toJSONExchange();">JSON Exchange</span>
+    </div>
+  </section>
+
+
+</body>
+
 </html>

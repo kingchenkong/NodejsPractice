@@ -13,10 +13,10 @@ function Req_ajax(info, type) {
         dataType: 'json',
         cache: false,
         timeout: 5000,
-        success: function (data) {
+        success: function (feedback) {
             // - 資料傳送成功後就會執行這個function內的程式，可以在這裡寫入要執行的程式 
             console.log('Msg: ajax.js - sucess');
-            var res = data;
+            var res = feedback;
             if (res[0] == 'success') {
                 document.getElementById("status").innerHTML += "<p style='color:green; font-weight:bold;'>Sever sendback Msg: " + res[1] + "</p>";
             } else {

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/scss/login.min.css">
+    <!-- weichu's css -->
+    <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+    <!-- jQuery lib -->
+    <script src="/javascripts/ajax.js"></script>
+    <!-- ajax.js -->
+    <script>
+        function backToIndex() {
+            window.location.href = '/';
+        }
+        function SendAjaxRequest() {
+            document.getElementById("test1a").innerHTML = "<p id='test1'>test1 Msg: " + document.getElementById('acc-input').value + "</p>";
+            document.getElementById("test1p").innerHTML = "<p id='test1'>test1 Msg: " + document.getElementById('pwd-input').value + "</p>";
+
+            Req_ajax("form submit", "post", document.getElementById('acc-input').value, document.getElementById('pwd-input').value);
+
+        }
+    </script>
+</head>
+
+<body>
+    <p style="font-size: 30px;">Welcome to
+        <%= title %>
+    </p>
+    <section id="login-part">
+        <div class="login-button">
+            <span class="login" onclick="backToIndex();">back To Index</span>
+        </div>
+        <form id="UserInfoForm" action="/login" method='post'>
+            <div class="id-column">
+                <input id="acc-input" type="id-input" name="account" placeholder="Account">
+            </div>
+            <div class="pwd-column">
+                <input id="pwd-input" type="pwd-input" name="password" placeholder="Password">
+            </div>
+        </form>
+        <div class="login-button">
+            <span class="login" onclick="SendAjaxRequest();">Send</span>
+        </div>
+    </section>
+    <div id="json-text">
+        <p id="test1a">test1a</p>
+        <p id="test1p">test1p</p>
+        <p id="outputJSON">ddddd</p>
+    </div>
+    <div id="json-list">
+        <p id="pjl0">0</p>
+        <p id="pjl1">1</p>
+        <p id="pjl2">2</p>
+        <p id="pjl3">3</p>
+        <p id="pjl4">4</p>
+        <p id="pjl5">5</p>
+        <table class="for-table" border="1">
+            <thead>
+                <tr>
+                    <th> 喜愛顏色 </th>
+                    <th> 身高 </th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <table class="each-table" border="1" >
+            <thead>
+                <tr>
+                    <th>聯絡方式</th>
+                    <th>----</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
