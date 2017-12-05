@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-// ajax necessary
+// json ajax necessary
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 // router setting

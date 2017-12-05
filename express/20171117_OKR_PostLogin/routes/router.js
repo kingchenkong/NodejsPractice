@@ -20,7 +20,7 @@ router.post('/login', function (req, res, next) {
   var pwd = req.body.password;
 
   // db query -----
-  if (acc && pwd) {
+  if (acc != '' && pwd != '') {
     var filter = 'SELECT * FROM `employee` WHERE `Emp_Account` = ? AND `Password` = ?';
     /* 
      table: employee
