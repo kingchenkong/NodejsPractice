@@ -1,3 +1,4 @@
+
 // ----------------- Module require -----------------
 var express = require('express');
 var path = require('path');
@@ -6,6 +7,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var uuidv4 = require('uuid/v4');
+var multiparty = require('multiparty');
 // console.log('###### uuidv4: ' + uuidv4());
 
 // Module loading
@@ -31,7 +33,7 @@ var mysql_cloud = mysql.createConnection({
   dateStrings: true,
   database: 'okr_sys_test'
 });
-var db_con = mysql_local;
+var db_con = mysql_cloud;
 
 
 //session
@@ -85,36 +87,50 @@ var GCS_storage = GCS({
   keyFilename: './WorkDone-OKRsSystem-CMoneyPro-856a4473eb7c.json'
 });
 
-var GCS_bucketName = 'workdone-okrssystem-storage';
-var GCS_imgFloderPath = GCS_bucketName + '/OKRs_sys_images';
-var GCS_imgBucket = GCS_storage.bucket(GCS_bucketName + '/OKRs_sys_images');
-var GCS_sqlBucket = GCS_storage.bucket(GCS_bucketName + 'mysql_backUp');
+// var GCS_bucketName = 'workdone-okrssystem-storage';
+// var GCS_imgFloderPath = GCS_bucketName + '/OKRs_sys_images';
+// var GCS_imgBucket = GCS_storage.bucket(GCS_bucketName + '/OKRs_sys_images');
+// var GCS_sqlBucket = GCS_storage.bucket(GCS_bucketName + 'mysql_backUp');
+
+var GCS_imgBucketName = 'okrs-sys-emp-img';
+var GCS_imgBucketInstance = GCS_storage.bucket(GCS_imgBucketName);
+
 
 // check if a file exists in bucket
-var imgName = 'kong.png';
-var file = GCS_imgBucket.file(imgName);
+var imgName = 'admin.jpg';
+var file = GCS_imgBucketInstance.file(imgName);
 file.existsAsync()
   .then(exists => {
     if (exists) {
       // file exists in bucket
-      console.log('###########file: ' + imgName + 'is exist.');
+      console.log('###########\nfile: ' + imgName + ' is exist.\n###########');
     }
   })
   .catch(err => {
+    console.log('###########\n file: ' + imgName + 'is not exist.\n###########\n');
     return err
   });
 
-
 // upload file to bucket
 // let localFileLocation = './upload_buffer/images/zebra.gif';
-// imgBucket.uploadAsync(localFileLocation, { public: true })
+// let localFileLocation = './public/images/hosting.png';
+// GCS_imgBucketInstance.uploadAsync(localFileLocation, { public: true })
 //   .then(file => {
 //     // file saved
 //   });
+var GCS_uploadImagePublic = file_location => {
+  GCS_imgBucketInstance.uploadAsync(file_location, { public: true })
+    .then(file => {
+      // file saved
+      console.log('upload:');
+      console.log('name: ' + file.name);
+      console.log('bucket: ' + file.bucket)
+    })
+};
 
 // get public url for file
 var GCS_getPublicThumbnailUrlForItem = file_name => {
-  return `https://storage.googleapis.com/${GCS_imgFloderPath}/${file_name}`
+  return `https://storage.googleapis.com/${GCS_imgBucketName}/${file_name}`
 };
 // console.log('file_name: ' + GCS_getPublicThumbnailUrlForItem(imgName));
 // https://storage.googleapis.com/OKRs_sys_images/kong.png
@@ -122,6 +138,7 @@ var GCS_getPublicThumbnailUrlForItem = file_name => {
 // get GCS Img URL
 app.use(function (req, res, next) {
   req.GCS_getImgUrl = GCS_getPublicThumbnailUrlForItem;
+  req.GCS_uploadImg = GCS_uploadImagePublic;
   // 在routes 用這個物件 且要丟引數 file name string
   // ex: console.log('routes: file_name: ' + req.GCS_getImgUrl('kong.png'));
   next();

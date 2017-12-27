@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+  <p>Welcome to
+    <%= title %>
+  </p>
+  <div>
+    <button type="button" onclick="toUploadPage()">uploadPage</button>
+  </div>
+  <div id="imgDiv01">
+    <img src="<%= imgURL %>" alt="kong.png - 顯示失敗">
+  </div>
+
+</body>
+
+<script>
+  var imgURL = '<%= imgURL %>';
+  console.log('imgURL: ' + imgURL);
+  function toUploadPage() {
+    window.location.href = '/uploadPage';
+  }
+
+</script>
+
 </html>
