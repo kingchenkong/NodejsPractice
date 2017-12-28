@@ -7,7 +7,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var uuidv4 = require('uuid/v4');
-var multiparty = require('multiparty');
+// var multiparty = require('multiparty');
 // console.log('###### uuidv4: ' + uuidv4());
 
 // Module loading
@@ -158,6 +158,7 @@ app.use(logger('dev'));
 // parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(express.bodyParser({uploadDir: './'}));
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
