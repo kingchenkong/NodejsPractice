@@ -73,77 +73,9 @@ app.use(function (req, res, next) {
 // ---------------------------------------------------
 
 // ----------------- GCP storage -----------------
-// 參考連結：
-// https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/0.39.0/storage/bucket
-// https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/0.39.0/storage/file?method=exists
-// https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/0.39.0/storage/bucket?method=upload
-
-
-var Promise = require('bluebird');
-var GCS = Promise.promisifyAll(require('@google-cloud/storage'));
-
-var GCS_storage = GCS({
-  projectId: 'workdone-okrssystem-cmoneypro',
-  keyFilename: './WorkDone-OKRsSystem-CMoneyPro-856a4473eb7c.json'
-});
-
-// var GCS_bucketName = 'workdone-okrssystem-storage';
-// var GCS_imgFloderPath = GCS_bucketName + '/OKRs_sys_images';
-// var GCS_imgBucket = GCS_storage.bucket(GCS_bucketName + '/OKRs_sys_images');
-// var GCS_sqlBucket = GCS_storage.bucket(GCS_bucketName + 'mysql_backUp');
-
-var GCS_imgBucketName = 'okrs-sys-emp-img';
-var GCS_imgBucketInstance = GCS_storage.bucket(GCS_imgBucketName);
-
-
-// check if a file exists in bucket
-var imgName = 'admin.jpg';
-var file = GCS_imgBucketInstance.file(imgName);
-file.existsAsync()
-  .then(exists => {
-    if (exists) {
-      // file exists in bucket
-      console.log('###########\nfile: ' + imgName + ' is exist.\n###########');
-    }
-  })
-  .catch(err => {
-    console.log('###########\n file: ' + imgName + 'is not exist.\n###########\n');
-    return err
-  });
-
-// upload file to bucket
-// let localFileLocation = './upload_buffer/images/zebra.gif';
-// let localFileLocation = './public/images/hosting.png';
-// GCS_imgBucketInstance.uploadAsync(localFileLocation, { public: true })
-//   .then(file => {
-//     // file saved
-//   });
-var GCS_uploadImagePublic = file_location => {
-  GCS_imgBucketInstance.uploadAsync(file_location, { public: true })
-    .then(file => {
-      // file saved
-      console.log('upload:');
-      console.log('name: ' + file.name);
-      console.log('bucket: ' + file.bucket)
-    })
-};
-
-// get public url for file
-var GCS_getPublicThumbnailUrlForItem = file_name => {
-  return `https://storage.googleapis.com/${GCS_imgBucketName}/${file_name}`
-};
-// console.log('file_name: ' + GCS_getPublicThumbnailUrlForItem(imgName));
-// https://storage.googleapis.com/OKRs_sys_images/kong.png
-
-// get GCS Img URL
-app.use(function (req, res, next) {
-  req.GCS_getImgUrl = GCS_getPublicThumbnailUrlForItem;
-  req.GCS_uploadImg = GCS_uploadImagePublic;
-  // 在routes 用這個物件 且要丟引數 file name string
-  // ex: console.log('routes: file_name: ' + req.GCS_getImgUrl('kong.png'));
-  next();
-});
-
+// use ./library/service_GCS.js
+// const Storage = require('@google-cloud/storage');
+// const Multer = require('multer');
 //---------------------------------------------------
 
 // view engine setup
